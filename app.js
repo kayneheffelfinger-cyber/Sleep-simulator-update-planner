@@ -317,7 +317,26 @@ function renderOverview() {
   const roadPct = state.roadmap.length ? Math.round(completedRoad/state.roadmap.length*100) : 0;
   const nextItems = state.roadmap.filter(x=>x.status!=="Released").slice(0,4);
   return `
-    ${heading("YOUR DEVELOPMENT SPACE","Make better updates, one step at a time.","A calm command center for planning, building, and testing your Roblox game. Your changes are saved in this browser.")}
+    <section class="welcome-hero">
+      <div class="hero-copy">
+        <div class="hero-kicker"><span class="hero-kicker-dot"></span> YOUR PERSONAL DEV STUDIO</div>
+        <h1>Dream bigger.<br><span>Build better.</span></h1>
+        <p>Your quiet corner to plan updates, level up your game, and bring every new idea to life.</p>
+        <div class="hero-actions">
+          <button class="button button-light" data-goto="roadmap">Explore roadmap <span>↗</span></button>
+          <span class="hero-caption"><span>☾</span> Made for Sleep Simulator</span>
+        </div>
+      </div>
+      <div class="hero-art" aria-hidden="true">
+        <div class="hero-spark spark-a">✦</div><div class="hero-spark spark-b">·</div><div class="hero-spark spark-c">✧</div>
+        <div class="hero-orbit orbit-back"></div>
+        <div class="hero-orbit orbit-front"></div>
+        <div class="hero-moon"><div class="moon-crater crater-a"></div><div class="moon-crater crater-b"></div><div class="moon-crater crater-c"></div></div>
+        <div class="hero-cloud cloud-a"></div><div class="hero-cloud cloud-b"></div>
+        <div class="hero-star star-a"></div><div class="hero-star star-b"></div><div class="hero-star star-c"></div>
+      </div>
+      <div class="hero-bottom-glow"></div>
+    </section>
     <div class="stats-grid">
       <div class="stat-card"><div class="stat-top">Roadmap planned <span class="stat-icon tint-purple">⌁</span></div><div class="stat-value">${c.road.Planned}</div><div class="stat-foot">${c.road["In progress"]} currently in progress</div></div>
       <div class="stat-card"><div class="stat-top">Open tasks <span class="stat-icon tint-blue">☷</span></div><div class="stat-value">${c.open}</div><div class="stat-foot">${state.backlog.length-c.open} tasks marked done</div></div>
