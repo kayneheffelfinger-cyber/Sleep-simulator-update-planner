@@ -444,6 +444,13 @@ document.addEventListener("click", async event => {
 });
 document.addEventListener("change", event => {
   const el = event.target;
+  if (el.id === "backlog-filter") filterBacklog();
+  if (el.id === "prompt-filter") {
+    const selected = el.value;
+    document.querySelectorAll("[data-prompt-card]").forEach(card => {
+      card.style.display = selected === "All" || card.dataset.tool === selected ? "" : "none";
+    });
+  }
   if (el.matches("[data-list][data-field]")) {
     const list = state[el.dataset.list];
     const id = el.dataset.id;
@@ -466,7 +473,14 @@ document.addEventListener("submit", event => {
   saveState(); render(); showToast("Task added to your backlog.");
 });
 document.addEventListener("input", event => {
-  if (event.target.id==="backlog-search" || event.target.id==="backlog-filter") filterBacklog();
+  if (event.target.matches("textarea[id^=prompt-]:not(#prompt-filter)")) {
+    const match = event.target.id.match(/^prompt-(\\d+)$/);
+    if (match && state.prompts[Number(match[1])]) {
+      state.prompts[Number(match[1])].text = event.target.value;
+      saveState();
+    }
+  }
+  if (event.target.id==="backlog-search") filterBacklog();
   if (event.target.id==="prompt-filter") {
     const selected = event.target.value;
     document.querySelectorAll("[data-prompt-card]").forEach(card => {
