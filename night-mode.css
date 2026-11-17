@@ -1,0 +1,247 @@
+/* Sleep Simulator — forced full-site midnight theme.
+   Loaded after styles.css so every planner section uses dark surfaces. */
+:root {
+  color-scheme: dark !important;
+  --bg: #070b17;
+  --panel: #10182b;
+  --panel-soft: #151f36;
+  --ink: #f4f6ff;
+  --muted: #bec9e1;
+  --line: #2d3a57;
+  --indigo: #b7adff;
+  --indigo-soft: #2b2852;
+  --teal: #83e5d1;
+  --teal-soft: #17443f;
+  --blue: #a5caff;
+  --blue-soft: #203d64;
+  --amber: #ffdda4;
+  --amber-soft: #4d3920;
+  --red: #ffb2c0;
+  --red-soft: #4a2635;
+  --green: #a2edc3;
+  --green-soft: #194433;
+  --shadow: 0 16px 45px rgba(0,0,0,.30);
+}
+html, body {
+  min-height: 100%;
+  color: #edf2ff !important;
+  background: #070b17 !important;
+}
+body {
+  background:
+    radial-gradient(ellipse at 82% -8%, rgba(91,79,184,.17), transparent 34rem),
+    radial-gradient(ellipse at 7% 31%, rgba(30,102,132,.12), transparent 28rem),
+    #070b17 !important;
+}
+.app-shell, .main-panel, #page-content {
+  background: transparent !important;
+  color: #edf2ff !important;
+}
+.sidebar {
+  color: #f5f6ff !important;
+  background: linear-gradient(180deg,#111a36 0%,#080e1c 100%) !important;
+  border-right: 1px solid #2a3655 !important;
+}
+.brand strong, .sidebar-note strong { color: #f8f8ff !important; }
+.brand small, .sidebar-label, .sidebar-footer,
+.sidebar-note p { color: #bac5df !important; }
+.sidebar-link, .moon-small { color: #d0c9ff !important; }
+.nav-item { color: #d5def2 !important; background: transparent !important; }
+.nav-item span { color: #bdc8e8 !important; }
+.nav-item b { color: #e0e6f8 !important; background: #283451 !important; }
+.nav-item:hover { color: #fff !important; background: #1b2946 !important; }
+.nav-item.active {
+  color: #fff !important;
+  background: linear-gradient(100deg,#343064,#20294c) !important;
+  border-color: #514b8f !important;
+  box-shadow: inset 3px 0 #b9b0ff !important;
+}
+.sidebar-note {
+  background: #141e35 !important;
+  border-color: #354361 !important;
+}
+.topbar {
+  color: #f1f4ff !important;
+  background: rgba(9,15,30,.97) !important;
+  border-bottom: 1px solid #2b3855 !important;
+  box-shadow: 0 6px 24px rgba(0,0,0,.22) !important;
+}
+.breadcrumb { color: #bec9df !important; }
+.breadcrumb i { color: #74809b !important; }
+.breadcrumb strong { color: #f2f5ff !important; }
+.save-indicator {
+  color: #aaf0d6 !important;
+  background: #11332f !important;
+  border: 1px solid #285c50 !important;
+}
+.live-dot { background: #73e5b4 !important; box-shadow: 0 0 0 4px rgba(115,229,180,.15) !important; }
+
+.page-title, .panel-header h2, .panel-header h3,
+.stat-value, .stat-card strong, .milestone strong,
+.workflow-step strong, .prompt-card h3,
+.form-panel h3, .test-summary strong, .economy-row strong {
+  color: #f6f7ff !important;
+}
+.eyebrow { color: #c1baff !important; }
+.page-subtitle, .stat-top, .stat-foot,
+.panel-header p, .workflow-step p, .milestone small,
+.helper, .prompt-when, .prompt-actions small,
+.session-card small, .session-card p,
+.test-summary p, .economy-row small {
+  color: #c1cce2 !important;
+}
+.page-footer {
+  color: #bdc8df !important;
+  background: #0b1223 !important;
+  border-top: 1px solid #2a3651 !important;
+}
+.page-footer a, .text-link { color: #c5beff !important; }
+.text-link:hover { color: #f0edff !important; }
+
+.panel, .stat-card, .prompt-card, .form-panel,
+.session-card, .test-summary, .table-wrap,
+.economy-row {
+  color: #edf2ff !important;
+  background: #10182b !important;
+  border: 1px solid #2c3956 !important;
+  box-shadow: 0 14px 38px rgba(0,0,0,.24) !important;
+}
+.panel-header {
+  color: #f5f6ff !important;
+  background: #151f35 !important;
+  border-bottom: 1px solid #2c3956 !important;
+}
+.panel-body { color: #e8edfc !important; background: #10182b !important; }
+.stat-card:nth-child(1) { border-top: 3px solid #b3aaff !important; }
+.stat-card:nth-child(2) { border-top: 3px solid #94c1ff !important; }
+.stat-card:nth-child(3) { border-top: 3px solid #79dfce !important; }
+.stat-card:nth-child(4) { border-top: 3px solid #ffd28c !important; }
+.stat-icon.tint-purple { color: #d0c9ff !important; background: #302c5b !important; }
+.stat-icon.tint-blue { color: #b6d5ff !important; background: #1d3a61 !important; }
+.stat-icon.tint-teal { color: #a1f0df !important; background: #174a45 !important; }
+.stat-icon.tint-amber { color: #ffe1ac !important; background: #4d3920 !important; }
+
+.progress-wrap { background: #2b3651 !important; }
+.progress-fill { background: linear-gradient(90deg,#a69aff,#76dfcb) !important; }
+.milestone { border-bottom: 1px solid #293653 !important; }
+.milestone-num, .workflow-num {
+  color: #d2cbff !important;
+  background: #302c58 !important;
+}
+.workflow-step, .milestone { color: #f0f4ff !important; }
+.notice {
+  color: #e4e8ff !important;
+  background: #202345 !important;
+  border: 1px solid #424979 !important;
+}
+.notice strong { color: #fff !important; }
+
+.button-primary {
+  color: #fff !important;
+  background: linear-gradient(135deg,#8175ed,#5d55c2) !important;
+  border: 1px solid #958cf3 !important;
+}
+.button-primary:hover { background: linear-gradient(135deg,#988dfb,#7068d7) !important; }
+.button-secondary, .icon-button, .button-light {
+  color: #f0f2ff !important;
+  background: #202b45 !important;
+  border: 1px solid #455474 !important;
+  box-shadow: none !important;
+}
+.button-secondary:hover, .icon-button:hover, .button-light:hover {
+  color: #fff !important;
+  background: #30385f !important;
+  border-color: #8c83e7 !important;
+}
+.button-danger { color: #ffbdc8 !important; background: #482532 !important; }
+
+.status-pill, .priority-pill {
+  color: #e5ebfb !important;
+  background: #293650 !important;
+  border: 1px solid #3e4b68 !important;
+}
+.status-pill.released, .status-pill.passed, .status-pill.done {
+  color: #a9f2c9 !important; background: #174333 !important; border-color: #2e6c53 !important;
+}
+.status-pill.in-progress, .status-pill.testing {
+  color: #b9d8ff !important; background: #1d3b62 !important; border-color: #3b5e8c !important;
+}
+.status-pill.failed, .status-pill.blocked {
+  color: #ffc0cc !important; background: #4b2636 !important; border-color: #794357 !important;
+}
+.status-pill.planned, .status-pill.not-run {
+  color: #d0d9ec !important; background: #29354d !important; border-color: #41506d !important;
+}
+.priority-pill.critical { color: #ffc1ce !important; background: #4c2938 !important; }
+.priority-pill.high { color: #ffe0aa !important; background: #4b3821 !important; }
+.priority-pill.medium { color: #bedbff !important; background: #1e3c63 !important; }
+.priority-pill.low { color: #a4f0df !important; background: #19453f !important; }
+
+.table-wrap, .data-table, .data-table tbody { background: #10182b !important; }
+.data-table th {
+  color: #cdd7ee !important;
+  background: #1c2943 !important;
+  border-bottom: 1px solid #3a4968 !important;
+}
+.data-table td {
+  color: #dbe4f7 !important;
+  background: #10182b !important;
+  border-top: 1px solid #2b3854 !important;
+}
+.data-table td strong { color: #f7f8ff !important; }
+.data-table .subtext, .table-id { color: #bdc9e2 !important; }
+.data-table tbody tr:nth-child(even) td { background: #141f35 !important; }
+.data-table tr:hover td { background: #202c48 !important; }
+.empty-state { color: #cbd5ea !important; }
+
+input:not([type="checkbox"]), textarea, select,
+.search-input, .filter-select, .field-input,
+.field-select, .field-textarea, .prompt-text {
+  color: #f1f4ff !important;
+  background: #0a1223 !important;
+  border: 1px solid #3b4a6a !important;
+  caret-color: #c2baff !important;
+}
+input::placeholder, textarea::placeholder,
+.search-input::placeholder, .field-input::placeholder,
+.field-textarea::placeholder, .prompt-text::placeholder {
+  color: #aebbd5 !important;
+  opacity: 1 !important;
+}
+input:focus, textarea:focus, select:focus {
+  color: #fff !important;
+  background: #141f36 !important;
+  border-color: #a69cff !important;
+  box-shadow: 0 0 0 3px rgba(166,156,255,.17) !important;
+}
+select option { color: #f2f5ff !important; background: #111a2e !important; }
+input[type="checkbox"] { accent-color: #a69cff !important; }
+.prompt-card:before { background: linear-gradient(90deg,#a79cff,#79e2ce) !important; }
+.tool-label { color: #e1ddff !important; background: #302c59 !important; }
+.prompt-text { color: #e7ecfb !important; background: #080f1e !important; }
+.test-ring { background: conic-gradient(#83e5d1 var(--progress,0%),#2b3854 0) !important; }
+.test-ring:before { background: #10182b !important; }
+.economy-row:hover { background: #18243c !important; border-color: #786fd0 !important; }
+
+.welcome-hero {
+  color: #fff !important;
+  background:
+    radial-gradient(ellipse at 76% 50%, rgba(111,101,221,.35), transparent 21rem),
+    linear-gradient(112deg,#10182f 0%,#19234b 52%,#222e5c 100%) !important;
+}
+.hero-copy h1, .hero-kicker { color: #f7f7ff !important; }
+.hero-copy h1 span { color: #d1caff !important; }
+.hero-copy p, .hero-caption { color: #e1e8fc !important; }
+.hero-kicker-dot { background: #8debd5 !important; }
+.toast { color: #fff !important; background: #1c2944 !important; border: 1px solid #465779 !important; }
+
+/* Avoid browser default light scrollbars on the dark workspace. */
+* { scrollbar-color: #4c5876 #0c1425; }
+*::-webkit-scrollbar { width: 10px; height: 10px; }
+*::-webkit-scrollbar-track { background: #0b1222; }
+*::-webkit-scrollbar-thumb { background: #3b4866; border: 2px solid #0b1222; border-radius: 20px; }
+@media (max-width: 760px) {
+  .sidebar { background: #0a1122 !important; }
+  .topbar { background: rgba(8,13,27,.98) !important; }
+  .welcome-hero { background: linear-gradient(135deg,#10182f,#202b58) !important; }
+}
