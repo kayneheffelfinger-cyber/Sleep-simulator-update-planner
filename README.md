@@ -71,7 +71,7 @@ A browser-based version of the planner is included in the repository:
 - `styles.css` — responsive styling
 - `app.js` — planner data and interactions
 
-The website includes the roadmap, backlog, prompt library, Claude session tracker, test checklist, and economy audit. Editable changes are stored in the current browser using local storage. Use **Export backup** to download a JSON copy before clearing browser data or switching devices.
+The website includes a moonlit welcome dashboard, roadmap, backlog, prompt library, Claude session tracker, test checklist, and economy audit. The design is responsive for desktop and mobile. Editable changes are stored in the current browser using local storage. Prompt edits are saved too. Use **Export backup** to download a JSON copy before clearing browser data or switching devices. A matching crescent-moon favicon is included.
 
 ### Run it locally
 
@@ -81,4 +81,4 @@ Download `index.html`, `styles.css`, and `app.js` into the same folder, then ope
 
 GitHub Pages supports publishing from the `main` branch and repository root. In the repository, open **Settings → Pages**, choose **Deploy from a branch**, select **main** and **/(root)**, then save.
 
-**Plan visibility note:** GitHub Pages on GitHub Free for personal accounts requires a public repository. This repository is currently private. To publish it with GitHub Pages on the Free plan, you would need to change the repository visibility to public first. A published Pages site is publicly accessible, so do not publish private information. If you want to keep this repository private, use a hosting option that supports private repositories or run the downloaded files locally.
+**Visibility note:** This repository is currently public, so its files can be viewed by anyone. Review the workbook, prompts, and source files for personal or private information before sharing the site. A GitHub Pages site is also public.
