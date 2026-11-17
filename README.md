@@ -82,3 +82,8 @@ Download `index.html`, `styles.css`, and `app.js` into the same folder, then ope
 GitHub Pages supports publishing from the `main` branch and repository root. In the repository, open **Settings → Pages**, choose **Deploy from a branch**, select **main** and **/(root)**, then save.
 
 **Visibility note:** This repository is currently public, so its files can be viewed by anyone. Review the workbook, prompts, and source files for personal or private information before sharing the site. A GitHub Pages site is also public.
+
+
+### Full dark appearance
+
+The website loads `night-mode.css` after the base stylesheet. It applies dark colors to all sections, including cards, tables, form fields, dropdowns, and prompt editors, with brighter text for readability. After publication, use a hard refresh (Ctrl + Shift + R on most Chromebooks and desktop browsers) if an older cached version remains visible.
