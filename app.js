@@ -419,8 +419,8 @@ document.addEventListener("click", async event => {
     catch { area.select(); document.execCommand("copy"); showToast("Prompt copied."); }
     return;
   }
-  if (event.target.id === "export-button") exportBackup();
-  if (event.target.id === "import-button") document.getElementById("import-file").click();
+  if (event.target.closest("#export-button")) exportBackup();
+  if (event.target.closest("#import-button")) document.getElementById("import-file").click();
   if (event.target.closest("#reset-button")) resetPlanner();
 });
 document.addEventListener("change", event => {
@@ -448,6 +448,12 @@ document.addEventListener("submit", event => {
 });
 document.addEventListener("input", event => {
   if (event.target.id==="backlog-search" || event.target.id==="backlog-filter") filterBacklog();
+  if (event.target.id==="prompt-filter") {
+    const selected = event.target.value;
+    document.querySelectorAll("[data-prompt-card]").forEach(card => {
+      card.style.display = selected==="All" || card.dataset.tool===selected ? "" : "none";
+    });
+  }
 });
 function filterBacklog() {
   const search = (document.getElementById("backlog-search")?.value || "").toLowerCase();
