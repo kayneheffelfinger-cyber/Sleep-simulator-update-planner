@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#111a35">
+  <meta name="description" content="A personal development dashboard and update planner for the Roblox game Sleep Simulator.">
+  <title>Sleep Simulator — Update Planner</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar">
+      <a class="brand" href="#overview" aria-label="Sleep Simulator planner home">
+        <span class="brand-mark">☾</span>
+        <span><strong>sleep simulator</strong><small>UPDATE PLANNER</small></span>
+      </a>
+      <div class="sidebar-label">WORKSPACE</div>
+      <nav class="main-nav" aria-label="Main navigation">
+        <button class="nav-item active" data-page="overview"><span>◈</span> Overview</button>
+        <button class="nav-item" data-page="roadmap"><span>⌁</span> Roadmap <b id="nav-roadmap-count">10</b></button>
+        <button class="nav-item" data-page="backlog"><span>☷</span> Backlog <b id="nav-backlog-count">14</b></button>
+        <button class="nav-item" data-page="prompts"><span>✧</span> Prompt library</button>
+        <button class="nav-item" data-page="sessions"><span>◷</span> Claude sessions</button>
+        <button class="nav-item" data-page="testing"><span>✓</span> Test checklist</button>
+        <button class="nav-item" data-page="economy"><span>◉</span> Economy audit</button>
+      </nav>
+      <div class="sidebar-spacer"></div>
+      <div class="sidebar-note">
+        <span class="moon-small">✦</span>
+        <strong>Small updates. Better game.</strong>
+        <p>Plan one change, build it, test it, then move to the next.</p>
+      </div>
+      <a class="sidebar-link" href="./Sleep_Simulator_Update_Planner.xlsx" download>↓ Download Excel planner</a>
+      <div class="sidebar-footer">SLEEP SIMULATOR • PERSONAL WORKSPACE</div>
+    </aside>
+
+    <main class="main-panel">
+      <header class="topbar">
+        <div class="mobile-brand"><span class="brand-mark">☾</span><strong>Sleep Simulator</strong></div>
+        <div class="breadcrumb"><span>Workspace</span><i>/</i><strong id="crumb-current">Overview</strong></div>
+        <div class="top-actions">
+          <span class="save-indicator"><span class="live-dot"></span> Saved in this browser</span>
+          <button class="icon-button" id="export-button" title="Export a backup">⇧ <span>Export backup</span></button>
+          <button class="icon-button" id="import-button" title="Import a backup">⇩</button>
+          <input id="import-file" type="file" accept="application/json,.json" hidden>
+        </div>
+      </header>
+      <div id="page-content" class="page-content" aria-live="polite"></div>
+      <footer class="page-footer">
+        <span>Made for your Sleep Simulator development journey.</span>
+        <span><a href="https://github.com/kayneheffelfinger-cyber/Sleep-simulator-update-planner" target="_blank" rel="noreferrer">View source on GitHub ↗</a></span>
+      </footer>
+    </main>
+  </div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="./app.js"></script>
+</body>
+</html>
