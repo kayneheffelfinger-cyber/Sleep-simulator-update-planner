@@ -61,3 +61,24 @@ When the roadmap or prompts change, update the workbook and replace the package 
 ---
 
 *Made to help plan small, safe, testable updates to Sleep Simulator.*
+
+
+## 🌐 Website version
+
+A browser-based version of the planner is included in the repository:
+
+- `index.html` — website entry page
+- `styles.css` — responsive styling
+- `app.js` — planner data and interactions
+
+The website includes the roadmap, backlog, prompt library, Claude session tracker, test checklist, and economy audit. Editable changes are stored in the current browser using local storage. Use **Export backup** to download a JSON copy before clearing browser data or switching devices.
+
+### Run it locally
+
+Download `index.html`, `styles.css`, and `app.js` into the same folder, then open `index.html` in a modern browser. The Excel workbook remains available as a separate download.
+
+### Publish with GitHub Pages
+
+GitHub Pages supports publishing from the `main` branch and repository root. In the repository, open **Settings → Pages**, choose **Deploy from a branch**, select **main** and **/(root)**, then save.
+
+**Plan visibility note:** GitHub Pages on GitHub Free for personal accounts requires a public repository. This repository is currently private. To publish it with GitHub Pages on the Free plan, you would need to change the repository visibility to public first. A published Pages site is publicly accessible, so do not publish private information. If you want to keep this repository private, use a hosting option that supports private repositories or run the downloaded files locally.
