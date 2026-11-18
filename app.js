@@ -375,12 +375,80 @@ function renderOverview() {
       </div>
     </section>`;
 }
+function roadmapPromptText(item, tool) {
+  const phase = item.stage + " — " + item.theme;
+  if (tool === "chatgpt") {
+    return "You are helping plan updates for my existing Roblox game, Sleep Simulator.\n\n" +
+      "ROADMAP PHASE: " + phase + "\nPLAYER VALUE: " + item.value + "\nSCOPE TO REVIEW: " + item.scope +
+      "\nACCEPTANCE CHECK: " + item.done + "\n\n" +
+      "Create a focused planning brief for this phase. Break the scope into small, ordered tasks; identify existing systems and files that should be inspected before any edit; list edge cases, multiplayer/data-saving/purchase risks where relevant; and turn the acceptance check into concrete Roblox Studio test steps.\n\n" +
+      "Do not invent project structure or APIs. Do not rebuild existing beds, rebirths, the skill tree, or the Zzz shop. Do not change saved-data keys or purchase flows without an explicit migration and safety plan. Keep the result practical and limited to this phase.";
+  }
+  return "You are my implementation partner for the Roblox game Sleep Simulator. Work only on the roadmap phase below.\n\n" +
+    "PHASE: " + phase + "\nWHY IT MATTERS: " + item.value + "\nPLANNED SCOPE: " + item.scope +
+    "\nDEFINITION OF DONE: " + item.done + "\n\n" +
+    "First inspect the actual repository and explain which scripts/modules own the affected behavior. Then propose the smallest safe implementation plan, including dependencies, data compatibility, server/client boundaries, and risks. Do not edit unrelated systems or invent paths/APIs. Preserve the existing beds, rebirth system, skill tree, Zzz purchases, and player data. After I approve the plan, implement in small steps and provide exact Roblox Studio test instructions.";
+}
+
 function renderRoadmap() {
-  return `${heading("PLAN YOUR NEXT RELEASE","Update roadmap","These are suggested milestones. Change priority and status as your project moves forward.")}
-  <div class="table-tools"><span class="notice" style="padding:8px 11px">Tip: mark a stage <strong>Released</strong> after it has been tested in Roblox Studio.</span></div>
-  <div class="table-wrap"><table class="data-table"><thead><tr><th>Stage</th><th>Update</th><th>Player value</th><th>Scope / ideas</th><th>Done when…</th><th>Priority</th><th>Status</th></tr></thead><tbody>
-  ${state.roadmap.map(x=>`<tr><td><strong>${esc(x.stage)}</strong></td><td><strong>${esc(x.theme)}</strong></td><td>${esc(x.value)}</td><td>${esc(x.scope)}</td><td>${esc(x.done)}</td><td><select class="field-select" data-list="roadmap" data-id="${x.id}" data-field="priority">${options(["Critical","High","Medium","Low"],x.priority)}</select></td><td><select class="field-select" data-list="roadmap" data-id="${x.id}" data-field="status">${options(["Planned","In progress","Testing","Released"],x.status)}</select></td></tr>`).join("")}
-  </tbody></table></div>`;
+  const released = state.roadmap.filter(x => x.status === "Released").length;
+  const percent = state.roadmap.length ? Math.round(released / state.roadmap.length * 100) : 0;
+  const firstRow = state.roadmap.slice(0, 5);
+  const secondRow = state.roadmap.slice(5, 10).reverse();
+  const stationCards = rows => rows.map(x => {
+    const number = String(Number(x.id) + 1).padStart(2, "0");
+    const stageName = x.stage.replace(/^\d+\s*[—-]\s*/, "") || x.stage;
+    const statusClass = x.status.toLowerCase().replace(/\s+/g, "-");
+    return '<article class="roadmap-station" id="roadmap-stage-' + esc(x.id) + '">' +
+      '<div class="roadmap-node"><span class="roadmap-node-halo"></span><span class="roadmap-node-ring"></span>' +
+      '<div class="roadmap-orb"><span>#' + number + '</span></div><div class="roadmap-platform"><span></span></div></div>' +
+      '<div class="roadmap-station-content">' +
+      '<div class="roadmap-stage-label">PHASE ' + number + ' <span>•</span> ' + esc(stageName) + '</div>' +
+      '<h3>' + esc(x.theme) + '</h3><p class="roadmap-value">' + esc(x.value) + '</p>' +
+      '<div class="roadmap-detail"><span>FOCUS</span><p>' + esc(x.scope) + '</p></div>' +
+      '<div class="roadmap-detail roadmap-success"><span>SUCCESS CHECK</span><p>' + esc(x.done) + '</p></div>' +
+      '<div class="roadmap-prompt-stack">' +
+      '<div class="roadmap-prompt-box"><div class="roadmap-prompt-heading"><span>CHATGPT PROMPT</span><b>✦</b></div>' +
+      '<p>Create a focused phase brief, task breakdown, risks, and acceptance tests.</p>' +
+      '<button type="button" data-copy-roadmap="' + esc(x.id) + '" data-roadmap-tool="chatgpt">Copy prompt ↗</button></div>' +
+      '<div class="roadmap-prompt-box claude"><div class="roadmap-prompt-heading"><span>CLAUDE PROMPT</span><b>☾</b></div>' +
+      '<p>Inspect the current project and plan the smallest safe implementation.</p>' +
+      '<button type="button" data-copy-roadmap="' + esc(x.id) + '" data-roadmap-tool="claude">Copy prompt ↗</button></div>' +
+      '</div>' +
+      '<div class="roadmap-controls">' +
+      '<label>PRIORITY<select class="field-select" data-list="roadmap" data-id="' + esc(x.id) + '" data-field="priority">' + options(["Critical","High","Medium","Low"],x.priority) + '</select></label>' +
+      '<label>STATUS<select class="field-select" data-list="roadmap" data-id="' + esc(x.id) + '" data-field="status">' + options(["Planned","In progress","Testing","Released"],x.status) + '</select></label>' +
+      '<span class="roadmap-current-status ' + statusClass + '">' + esc(x.status) + '</span></div></div></article>';
+  }).join("");
+
+  const timeline = state.roadmap.map(x => {
+    const number = String(Number(x.id) + 1).padStart(2, "0");
+    const stageName = x.stage.replace(/^\d+\s*[—-]\s*/, "") || x.stage;
+    const timelineClass = x.status === "Released" ? "released" : (x.status === "In progress" || x.status === "Testing" ? "active" : "");
+    return '<button type="button" class="roadmap-timeline-stop ' + timelineClass + '" data-roadmap-jump="' + esc(x.id) + '" title="' + esc(x.theme) + '"><b>' + number + '</b><span>' + esc(stageName) + '</span></button>';
+  }).join("");
+
+  return '<section class="roadmap-cosmos">' +
+    '<div class="roadmap-nebula nebula-one"></div><div class="roadmap-nebula nebula-two"></div>' +
+    '<div class="roadmap-board-head"><div><div class="roadmap-eyebrow"><span></span> SLEEP SIMULATOR • DEVELOPMENT MAP</div>' +
+    '<h1>NEW LOOK ROADMAP</h1><p>From the first audit to the next big release. Plan each phase, build it carefully, and test before launch.</p></div>' +
+    '<div class="roadmap-progress-card"><strong>' + released + '<small> / ' + state.roadmap.length + '</small></strong>' +
+    '<span>PHASES RELEASED</span><div class="roadmap-progress-track"><i style="width:' + percent + '%"></i></div><b>' + percent + '% COMPLETE</b></div></div>' +
+    '<div class="roadmap-key"><span><i class="key-dot key-planned"></i> PLANNED</span>' +
+    '<span><i class="key-dot key-progress"></i> IN PROGRESS</span><span><i class="key-dot key-released"></i> RELEASED</span>' +
+    '<span class="roadmap-key-note">Select a prompt to copy a phase-specific brief.</span></div>' +
+    '<div class="roadmap-grid-row"><svg class="roadmap-connector" viewBox="0 0 1000 160" preserveAspectRatio="none" aria-hidden="true">' +
+    '<path class="connector-glow" d="M100 82 C150 4 250 4 300 82 S450 158 500 82 S650 4 700 82 S850 158 900 82"/>' +
+    '<path class="connector-line" d="M100 82 C150 4 250 4 300 82 S450 158 500 82 S650 4 700 82 S850 158 900 82"/></svg>' +
+    '<div class="roadmap-station-grid">' + stationCards(firstRow) + '</div></div>' +
+    '<div class="roadmap-grid-row roadmap-grid-row-lower"><svg class="roadmap-connector" viewBox="0 0 1000 160" preserveAspectRatio="none" aria-hidden="true">' +
+    '<path class="connector-glow" d="M100 82 C150 4 250 4 300 82 S450 158 500 82 S650 4 700 82 S850 158 900 82"/>' +
+    '<path class="connector-line" d="M100 82 C150 4 250 4 300 82 S450 158 500 82 S650 4 700 82 S850 158 900 82"/></svg>' +
+    '<div class="roadmap-station-grid roadmap-station-grid-reverse">' + stationCards(secondRow) + '</div></div>' +
+    '<div class="roadmap-timeline"><div class="roadmap-timeline-head"><strong>ROADMAP TIMELINE</strong>' +
+    '<span>Follow the milestones from assessment to release</span></div><div class="roadmap-timeline-track">' + timeline + '</div>' +
+    '<div class="roadmap-timeline-foot"><span>ASSESSMENT</span><span>DESIGN & BUILD</span><span>TESTING</span><span>LAUNCH</span></div></div>' +
+    '</section>';
 }
 function options(items,selected) { return items.map(x=>`<option value="${esc(x)}" ${x===selected?"selected":""}>${esc(x)}</option>`).join(""); }
 function renderBacklog() {
@@ -427,6 +495,11 @@ function renderEconomy() {
 document.addEventListener("click", async event => {
   const nav = event.target.closest("[data-page]");
   if (nav) { setPage(nav.dataset.page); return; }
+  const roadmapJump = event.target.closest("[data-roadmap-jump]");
+  if (roadmapJump) {
+    document.getElementById("roadmap-stage-" + roadmapJump.dataset.roadmapJump)?.scrollIntoView({behavior:"smooth",block:"center"});
+    return;
+  }
   const goto = event.target.closest("[data-goto]");
   if (goto) { event.preventDefault(); setPage(goto.dataset.goto); return; }
   const copy = event.target.closest("[data-copy-prompt]");
@@ -436,6 +509,27 @@ document.addEventListener("click", async event => {
     if (!area) return;
     try { await navigator.clipboard.writeText(area.value); showToast("Prompt copied. Paste it into Claude or Codex."); }
     catch { area.select(); document.execCommand("copy"); showToast("Prompt copied."); }
+    return;
+  }
+  const roadmapCopy = event.target.closest("[data-copy-roadmap]");
+  if (roadmapCopy) {
+    const item = state.roadmap.find(x => String(x.id) === String(roadmapCopy.dataset.copyRoadmap));
+    if (!item) return;
+    const prompt = roadmapPromptText(item, roadmapCopy.dataset.roadmapTool);
+    try {
+      await navigator.clipboard.writeText(prompt);
+      showToast("Phase prompt copied.");
+    } catch {
+      const temporary = document.createElement("textarea");
+      temporary.value = prompt;
+      temporary.style.position = "fixed";
+      temporary.style.opacity = "0";
+      document.body.appendChild(temporary);
+      temporary.select();
+      document.execCommand("copy");
+      temporary.remove();
+      showToast("Phase prompt copied.");
+    }
     return;
   }
   if (event.target.closest("#export-button")) exportBackup();
